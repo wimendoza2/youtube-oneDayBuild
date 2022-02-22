@@ -30,6 +30,7 @@ class Model {
             //revisamos que no hayan errores
             if error != nil || data == nil {
                 return
+                // hola
                 
             }
             
