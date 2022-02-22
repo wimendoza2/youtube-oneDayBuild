@@ -33,7 +33,9 @@ class Model {
                 
             }
             
+            print(String.init(data: data!, encoding: String.Encoding.utf8) ?? "hola MUndo")
             //parsing the data into video objects
+            
         }
         
         //iniciar la tarea
