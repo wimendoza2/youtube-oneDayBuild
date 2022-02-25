@@ -33,11 +33,21 @@ class Model {
                 // hola
                 
             }
+            do{
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                
+                let response = try decoder.decode(Response.self, from: data!)
+                dump(response)
+            }
+            catch{
+               print("fallo...")
+            }
+           // print(String.init(data: data!, encoding: String.Encoding.utf8) ?? "hola MUndo")
             
-            print(String.init(data: data!, encoding: String.Encoding.utf8) ?? "hola MUndo")
             //parsing the data into video objects
-            
-        }
+           }
         
         //iniciar la tarea
         dataTask.resume()
