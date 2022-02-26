@@ -6,10 +6,18 @@
 //
 
 import Foundation
+protocol ModelDelegate{
+    func videosFeteched(_ videos: [Video])
+}
+
 
 class Model {
     
-    func getVideos(){
+    
+    var delegate:ModelDelegate?
+    
+    
+    func getVideos() {
         
         // Creamos el objeto URL
         
@@ -34,20 +42,36 @@ class Model {
                 
             }
             do{
-                
+                //parsing the data into video objects
+              
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 
+    
+                
                 let response = try decoder.decode(Response.self, from: data!)
-                dump(response)
+                
+                
+                
+                if response.items != nil {
+                    DispatchQueue.main.async {
+                        //call the "videosFetched" method of the delegate
+                        self.delegate?.videosFeteched(response.items!)
+                    }
+                    
+                    
+                }
+                
+                
+                
+                //dump(response)
             }
             catch{
                print("fallo...")
             }
            // print(String.init(data: data!, encoding: String.Encoding.utf8) ?? "hola MUndo")
             
-            //parsing the data into video objects
-           }
+             }
         
         //iniciar la tarea
         dataTask.resume()
